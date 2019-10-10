@@ -24,8 +24,6 @@ class Annotation(DOMWidget):
     def __init__(self, toolbar, tasks, progress=None, canvas=None):
         if canvas is None:
             canvas = OutputCanvas()
-        if progress is None:
-            progress = Progress()
         super(Annotation, self).__init__(
             toolbar=toolbar,
             progress=progress,
@@ -33,7 +31,6 @@ class Annotation(DOMWidget):
             tasks=tasks
         )
         self.toolbar.register(self)
-        self.progress.register(self)
         self.on_msg(self.handle_message)
         self.observe(self.update_toolbar, 'toolbar', type='change')
         self.observe(self.update_progress, 'progress', type='change')
@@ -47,9 +44,9 @@ class Annotation(DOMWidget):
         self.update()
 
     def update_progress(self, data):
-        progress = data['new']
-        progress.register(self)
-        self.update()
+        #progress = data['new']
+        #progress.register(self)
+        self.update()        
 
     def update_canvas(self, data):
         self.update()
@@ -73,7 +70,7 @@ class Annotation(DOMWidget):
     def update(self):
         task = self.tasks.current
         self.toolbar.update(task.value)
-        self.progress.update()
+        #self.progress.update()
         self.canvas.render(task.output)
 
     def next(self):
