@@ -6,7 +6,6 @@ from .widget import DOMWidget, register_widget, widget_serialization
 
 from .shortcut import decode_key
 from .toolbar import Toolbar
-from .progress import Progress
 from .canvas import Canvas, OutputCanvas
 from .tasks import Tasks
 
@@ -25,14 +24,12 @@ class Annotation(DOMWidget):
             canvas = OutputCanvas()
         super(Annotation, self).__init__(
             toolbar=toolbar,
-            progress=progress,
             canvas=canvas,
             tasks=tasks
         )
         self.toolbar.register(self)
         self.on_msg(self.handle_message)
         self.observe(self.update_toolbar, 'toolbar', type='change')
-        self.observe(self.update_progress, 'progress', type='change')
         self.observe(self.update_canvas, 'canvas', type='change')
         self.observe(self.update_tasks, 'tasks', type='change')
         self.update()
