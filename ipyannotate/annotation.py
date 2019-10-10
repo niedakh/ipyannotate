@@ -17,7 +17,6 @@ class Annotation(DOMWidget):
     _model_name = Unicode('AnnotationModel').tag(sync=True)
 
     toolbar = Instance(Toolbar).tag(sync=True, **widget_serialization)
-    progress = Instance(Progress).tag(sync=True, **widget_serialization)
     canvas = Instance(Canvas).tag(sync=True, **widget_serialization)
     tasks = Instance(Tasks)
 
